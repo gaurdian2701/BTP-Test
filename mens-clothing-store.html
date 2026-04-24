@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BOLD MAN — Men's Clothing</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --dark: #111827;
+      --dark2: #1f2937;
+      --gray: #6b7280;
+      --light-gray: #f3f4f6;
+      --white: #ffffff;
+      --accent: #e63946;
+      --gold: #d4a017;
+      --border: #e5e7eb;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--white);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 64px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+    }
+
+    .nav-logo {
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 3px;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #d1d5db;
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    .nav-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .nav-icon {
+      background: none;
+      border: none;
+      color: var(--white);
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 6px;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-icon:hover { color: var(--accent); }
+
+    .cart-count {
+      position: absolute;
+      top: -2px;
+      right: -4px;
+      background: var(--accent);
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 700;
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      height: 92vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: var(--dark);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 40%, #16213e 100%);
+    }
+
+    .hero-pattern {
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 40px,
+        rgba(255,255,255,0.02) 40px,
+        rgba(255,255,255,0.02) 80px
+      );
+    }
+
+    .hero-accent-bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 6px;
+      background: var(--accent);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 8%;
+      max-width: 700px;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.05;
+      letter-spacing: -1px;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero p {
+      color: #9ca3af;
+      font-size: 1.1rem;
+      margin-bottom: 2.5rem;
+      max-width: 480px;
+    }
+
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      padding: 14px 32px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover { background: #c62d39; transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      color: white;
+      padding: 13px 30px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 2px solid rgba(255,255,255,0.3);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+      display: inline-block;
+    }
+
+    .btn-outline:hover { border-color: white; color: white; }
+
+    .hero-stats {
+      position: absolute;
+      right: 8%;
+      bottom: 12%;
+      display: flex;
+      gap: 3rem;
+      z-index: 2;
+    }
+
+    .stat { text-align: center; }
+    .stat-num {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: white;
+      line-height: 1;
+    }
+    .stat-num span { color: var(--accent); }
+    .stat-label {
+      font-size: 0.72rem;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    /* ── SECTION COMMONS ── */
+    section { padding: 90px 5%; }
+
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+      gap: 1rem;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+    }
+
+    .view-all {
+      white-space: nowrap;
+      color: var(--dark);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 2px;
+      transition: color 0.2s;
+    }
+
+    .view-all:hover { color: var(--accent); }
+
+    /* ── PRODUCT GRID ── */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .product-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: box-shadow 0.25s, transform 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+      transform: translateY(-4px);
+    }
+
+    .product-card:hover .card-actions { opacity: 1; transform: translateY(0); }
+    .product-card:hover .product-img { transform: scale(1.04); }
+
+    .product-img-wrap {
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      background: var(--light-gray);
+      position: relative;
+    }
+
+    .product-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Placeholder art for images */
+    .product-img-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      background: linear-gradient(160deg, #f0f0f0 0%, #e0e0e0 100%);
+      transition: transform 0.4s ease;
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--accent);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      z-index: 2;
+    }
+
+    .badge-new { background: var(--dark); }
+    .badge-sale { background: var(--accent); }
+    .badge-hot { background: var(--gold); color: var(--dark); }
+
+    .wishlist-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: white;
+      border: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s, color 0.2s;
+      z-index: 2;
+      color: #ccc;
+    }
+
+    .wishlist-btn:hover, .wishlist-btn.active { color: var(--accent); transform: scale(1.1); }
+
+    .card-actions {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.25s, transform 0.25s;
+      z-index: 3;
+    }
+
+    .add-to-cart {
+      width: 100%;
+      background: var(--black);
+      color: white;
+      border: none;
+      padding: 13px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .add-to-cart:hover { background: var(--accent); }
+
+    .product-info { padding: 1rem; }
+
+    .product-category {
+      font-size: 0.7rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 4px;
+    }
+
+    .product-name {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      line-height: 1.3;
+    }
+
+    .product-colors {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 0.7rem;
+    }
+
+    .color-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+
+    .color-dot:hover { transform: scale(1.3); }
+
+    .product-price {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .price-current {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--dark);
+    }
+
+    .price-original {
+      font-size: 0.9rem;
+      color: var(--gray);
+      text-decoration: line-through;
+    }
+
+    .price-save {
+      font-size: 0.72rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* ── CATEGORY BANNER STRIP ── */
+    .cat-strip {
+      background: var(--light-gray);
+      padding: 0 5%;
+    }
+
+    .cat-strip-inner {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      padding: 3rem 0;
+    }
+
+    .cat-card {
+      position: relative;
+      height: 220px;
+      overflow: hidden;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .cat-card-bg {
+      position: absolute;
+      inset: 0;
+      transition: transform 0.4s ease;
+    }
+
+    .cat-card:hover .cat-card-bg { transform: scale(1.06); }
+
+    .cat-tshirt { background: linear-gradient(135deg, #1a1a2e, #16213e); }
+    .cat-jeans  { background: linear-gradient(135deg, #1e3a5f, #0d2137); }
+    .cat-shirts { background: linear-gradient(135deg, #2d1b1b, #1a0d0d); }
+
+    .cat-icon {
+      position: absolute;
+      right: 20px;
+      bottom: -10px;
+      font-size: 6rem;
+      opacity: 0.2;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .cat-card:hover .cat-icon { opacity: 0.35; transform: scale(1.1) rotate(-5deg); }
+
+    .cat-content {
+      position: relative;
+      z-index: 2;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      height: 100%;
+    }
+
+    .cat-label {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .cat-name {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: white;
+      letter-spacing: -0.5px;
+    }
+
+    .cat-count {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+      margin-top: 4px;
+    }
+
+    .cat-arrow {
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 36px;
+      height: 36px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1rem;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .cat-card:hover .cat-arrow { background: var(--accent); border-color: var(--accent); }
+
+    /* ── PROMO BANNER ── */
+    .promo-banner {
+      background: var(--black);
+      padding: 60px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .promo-text h2 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 900;
+      color: white;
+      line-height: 1.1;
+    }
+
+    .promo-text h2 span { color: var(--accent); }
+    .promo-text p { color: #6b7280; margin-top: 0.5rem; font-size: 0.95rem; }
+
+    .promo-code-box {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .promo-code {
+      background: var(--dark2);
+      border: 2px dashed rgba(255,255,255,0.2);
+      color: white;
+      font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: 4px;
+      padding: 14px 28px;
+    }
+
+    /* ── PERKS ── */
+    .perks {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .perk {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 2rem 3%;
+      border-right: 1px solid var(--border);
+    }
+
+    .perk:last-child { border-right: none; }
+
+    .perk-icon {
+      font-size: 1.8rem;
+      flex-shrink: 0;
+    }
+
+    .perk-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .perk-desc {
+      font-size: 0.78rem;
+      color: var(--gray);
+    }
+
+    /* ── SIZE GUIDE CTA ── */
+    .size-cta {
+      background: var(--light-gray);
+      padding: 60px 5%;
+      text-align: center;
+    }
+
+    .size-cta h3 { font-size: 1.6rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .size-cta p { color: var(--gray); margin-bottom: 1.5rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      color: #9ca3af;
+      padding: 60px 5% 30px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand .nav-logo { display: block; margin-bottom: 1rem; font-size: 1.3rem; }
+    .footer-brand p { font-size: 0.85rem; line-height: 1.8; color: #6b7280; }
+
+    .footer-col h4 {
+      color: white;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.6rem; }
+    .footer-col ul li a {
+      color: #6b7280;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: var(--accent); }
+
+    .footer-bottom {
+      border-top: 1px solid #1f2937;
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .social-links { display: flex; gap: 1rem; }
+    .social-link {
+      width: 36px;
+      height: 36px;
+      background: #1f2937;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9ca3af;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .social-link:hover { background: var(--accent); color: white; }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--dark);
+      color: white;
+      padding: 14px 20px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      z-index: 9999;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      transform: translateY(80px);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      border-left: 4px solid var(--accent);
+      max-width: 300px;
+    }
+
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hero-stats { display: none; }
+      .cat-strip-inner { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .perks { grid-template-columns: 1fr 1fr; }
+      .perk { border-right: none; border-bottom: 1px solid var(--border); }
+      .perk:nth-child(odd) { border-right: 1px solid var(--border); }
+    }
+
+    @media (max-width: 600px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .perks { grid-template-columns: 1fr; }
+      .promo-banner { flex-direction: column; align-items: flex-start; }
+      .section-header { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav>
+  <a href="#" class="nav-logo">BOLD<span>MAN</span></a>
+  <ul class="nav-links">
+    <li><a href="#tshirts">T-Shirts</a></li>
+    <li><a href="#jeans">Jeans</a></li>
+    <li><a href="#shirts">Shirts</a></li>
+    <li><a href="#offers">Offers</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="nav-icon" title="Search" onclick="alert('Search coming soon!')">🔍</button>
+    <button class="nav-icon" title="Wishlist" onclick="alert('Wishlist coming soon!')">🤍</button>
+    <button class="nav-icon" title="Cart" onclick="alert('Cart coming soon!')">
+      🛒
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-accent-bar"></div>
+  <div class="hero-content">
+    <div class="hero-tag">New Collection 2025</div>
+    <h1>Dress Bold.<br><em>Stay Sharp.</em></h1>
+    <p>Premium men's clothing crafted for the modern man. From street to boardroom — own every moment.</p>
+    <div class="hero-btns">
+      <a href="#categories" class="btn-primary">Shop Now</a>
+      <a href="#offers" class="btn-outline">View Offers</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">12<span>K+</span></div>
+      <div class="stat-label">Happy Customers</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3<span>+</span></div>
+      <div class="stat-label">Collections</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">48<span>H</span></div>
+      <div class="stat-label">Fast Delivery</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PERKS ── -->
+<div class="perks">
+  <div class="perk">
+    <div class="perk-icon">🚚</div>
+    <div>
+      <div class="perk-title">Free Delivery</div>
+      <div class="perk-desc">On orders over ₹999</div>
+    </div>
+  </div>
+  <div class="perk">
+    <div class="perk-icon">↩️</div>
+    <div>
+      <div class="perk-title">Easy Returns</div>
+      <div class="perk-desc">30-day hassle-free returns</div>
+    </div>
+  </div>
+  <div class="perk">
+    <div class="perk-icon">🛡️</div>
+    <div>
+      <div class="perk-title">Genuine Products</div>
+      <div class="perk-desc">100% authentic clothing</div>
+    </div>
+  </div>
+  <div class="perk">
+    <div class="perk-icon">💳</div>
+    <div>
+      <div class="perk-title">Secure Payments</div>
+      <div class="perk-desc">UPI, Card, COD accepted</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CATEGORY BANNERS ── -->
+<div class="cat-strip" id="categories">
+  <div class="cat-strip-inner">
+    <a href="#tshirts" class="cat-card">
+      <div class="cat-card-bg cat-tshirt"></div>
+      <div class="cat-icon">👕</div>
+      <div class="cat-content">
+        <div class="cat-label">Men's</div>
+        <div class="cat-name">T-Shirts</div>
+        <div class="cat-count">24 styles available</div>
+      </div>
+      <div class="cat-arrow">→</div>
+    </a>
+    <a href="#jeans" class="cat-card">
+      <div class="cat-card-bg cat-jeans"></div>
+      <div class="cat-icon">👖</div>
+      <div class="cat-content">
+        <div class="cat-label">Men's</div>
+        <div class="cat-name">Jeans</div>
+        <div class="cat-count">18 fits available</div>
+      </div>
+      <div class="cat-arrow">→</div>
+    </a>
+    <a href="#shirts" class="cat-card">
+      <div class="cat-card-bg cat-shirts"></div>
+      <div class="cat-icon">👔</div>
+      <div class="cat-content">
+        <div class="cat-label">Men's</div>
+        <div class="cat-name">Shirts</div>
+        <div class="cat-count">32 styles available</div>
+      </div>
+      <div class="cat-arrow">→</div>
+    </a>
+  </div>
+</div>
+
+<!-- ── T-SHIRTS ── -->
+<section id="tshirts">
+  <div class="section-header">
+    <div>
+      <div class="section-label">Men's Collection</div>
+      <h2 class="section-title">T-Shirts</h2>
+    </div>
+    <a href="#" class="view-all">View All</a>
+  </div>
+  <div class="product-grid" id="tshirt-grid"></div>
+</section>
+
+<!-- ── PROMO BANNER ── -->
+<div class="promo-banner" id="offers">
+  <div class="promo-text">
+    <h2>Get <span>20% OFF</span><br>Your First Order</h2>
+    <p>Use code at checkout. Limited time offer.</p>
+  </div>
+  <div class="promo-code-box">
+    <div class="promo-code">BOLD20</div>
+    <button class="btn-primary" onclick="copyCode()">Copy Code</button>
+  </div>
+</div>
+
+<!-- ── JEANS ── -->
+<section id="jeans">
+  <div class="section-header">
+    <div>
+      <div class="section-label">Men's Collection</div>
+      <h2 class="section-title">Jeans</h2>
+    </div>
+    <a href="#" class="view-all">View All</a>
+  </div>
+  <div class="product-grid" id="jeans-grid"></div>
+</section>
+
+<!-- ── SHIRTS ── -->
+<section id="shirts">
+  <div class="section-header">
+    <div>
+      <div class="section-label">Men's Collection</div>
+      <h2 class="section-title">Shirts</h2>
+    </div>
+    <a href="#" class="view-all">View All</a>
+  </div>
+  <div class="product-grid" id="shirts-grid"></div>
+</section>
+
+<!-- ── SIZE GUIDE ── -->
+<div class="size-cta">
+  <h3>Not Sure About Your Size?</h3>
+  <p>Use our size guide to find your perfect fit — every time.</p>
+  <button class="btn-primary" onclick="alert('Size guide opening soon!')">View Size Guide</button>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">BOLD<span style="color:var(--accent)">MAN</span></a>
+      <p>Premium men's clothing for every occasion. Built on quality, driven by style.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#tshirts">T-Shirts</a></li>
+        <li><a href="#jeans">Jeans</a></li>
+        <li><a href="#shirts">Shirts</a></li>
+        <li><a href="#offers">Sale</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Help</h4>
+      <ul>
+        <li><a href="#">Size Guide</a></li>
+        <li><a href="#">Track Order</a></li>
+        <li><a href="#">Returns</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2025 BoldMan. All rights reserved.</div>
+    <div class="social-links">
+      <a href="#" class="social-link">f</a>
+      <a href="#" class="social-link">in</a>
+      <a href="#" class="social-link">tw</a>
+      <a href="#" class="social-link">ig</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ── TOAST ── -->
+<div class="toast" id="toast"></div>
+
+<script>
+  let cartCount = 0;
+
+  const products = {
+    tshirts: [
+      { name: "Classic Crew Tee", price: 699, original: 999, badge: "sale", colors: ["#1a1a1a","#ffffff","#2563eb","#16a34a"], emoji: "👕", category: "T-Shirts" },
+      { name: "Graphic Urban Tee", price: 849, original: null, badge: "new", colors: ["#0a0a0a","#7f1d1d","#1e3a5f"], emoji: "🎨", category: "T-Shirts" },
+      { name: "Slim Fit V-Neck", price: 599, original: 799, badge: "sale", colors: ["#374151","#f3f4f6","#92400e"], emoji: "👕", category: "T-Shirts" },
+      { name: "Polo Sport Tee", price: 1299, original: null, badge: "hot", colors: ["#14532d","#1e3a5f","#1a1a1a","#7f1d1d"], emoji: "🏷️", category: "T-Shirts" },
+    ],
+    jeans: [
+      { name: "Slim Fit Dark Wash", price: 1999, original: 2799, badge: "sale", colors: ["#1e3a5f","#0a0a0a","#374151"], emoji: "👖", category: "Jeans" },
+      { name: "Relaxed Straight Cut", price: 2199, original: null, badge: "new", colors: ["#1e3a5f","#6b7280"], emoji: "👖", category: "Jeans" },
+      { name: "Skinny Stretch Jeans", price: 1799, original: 2299, badge: "sale", colors: ["#0a0a0a","#1e3a5f"], emoji: "✂️", category: "Jeans" },
+      { name: "Distressed Raw Denim", price: 2499, original: null, badge: "hot", colors: ["#1e3a5f","#374151","#92400e"], emoji: "🔥", category: "Jeans" },
+    ],
+    shirts: [
+      { name: "Oxford Button-Down", price: 1499, original: 1999, badge: "sale", colors: ["#ffffff","#dbeafe","#fef3c7","#f3f4f6"], emoji: "👔", category: "Shirts" },
+      { name: "Linen Casual Shirt", price: 1299, original: null, badge: "new", colors: ["#f3f4f6","#d1fae5","#fef3c7"], emoji: "🌿", category: "Shirts" },
+      { name: "Slim Fit Formal", price: 1699, original: 2199, badge: "sale", colors: ["#1e3a5f","#374151","#ffffff","#1a1a1a"], emoji: "💼", category: "Shirts" },
+      { name: "Flannel Check Shirt", price: 1099, original: null, badge: "hot", colors: ["#7f1d1d","#14532d","#1e3a5f"], emoji: "🟥", category: "Shirts" },
+    ],
+  };
+
+  function renderCard(p, idx) {
+    const badge = p.badge === "new" ? "badge-new" : p.badge === "sale" ? "badge-sale" : "badge-hot";
+    const badgeText = p.badge === "new" ? "New" : p.badge === "sale" ? "Sale" : "🔥 Hot";
+    const saving = p.original ? Math.round((1 - p.price / p.original) * 100) : null;
+
+    const colorDots = p.colors.map(c =>
+      `<div class="color-dot" style="background:${c}" title="${c}"></div>`
+    ).join('');
+
+    const priceHTML = p.original
+      ? `<span class="price-current">₹${p.price.toLocaleString()}</span>
+         <span class="price-original">₹${p.original.toLocaleString()}</span>
+         <span class="price-save">${saving}% off</span>`
+      : `<span class="price-current">₹${p.price.toLocaleString()}</span>`;
+
+    return `
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <div class="product-img-placeholder" style="transition:transform 0.4s ease">
+            ${p.emoji}
+          </div>
+          <span class="product-badge ${badge}">${badgeText}</span>
+          <button class="wishlist-btn" onclick="toggleWishlist(this)" title="Wishlist">♡</button>
+          <div class="card-actions">
+            <button class="add-to-cart" onclick="addToCart('${p.name}', ${p.price})">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">${p.category}</div>
+          <div class="product-name">${p.name}</div>
+          <div class="product-colors">${colorDots}</div>
+          <div class="product-price">${priceHTML}</div>
+        </div>
+      </div>`;
+  }
+
+  function renderGrid(id, key) {
+    document.getElementById(id).innerHTML = products[key].map(renderCard).join('');
+  }
+
+  renderGrid('tshirt-grid', 'tshirts');
+  renderGrid('jeans-grid', 'jeans');
+  renderGrid('shirts-grid', 'shirts');
+
+  function addToCart(name, price) {
+    cartCount++;
+    document.getElementById('cartCount').textContent = cartCount;
+    showToast(`✓ ${name} added to cart`);
+  }
+
+  function toggleWishlist(btn) {
+    btn.classList.toggle('active');
+    btn.textContent = btn.classList.contains('active') ? '♥' : '♡';
+    showToast(btn.classList.contains('active') ? '♥ Added to wishlist' : 'Removed from wishlist');
+  }
+
+  function copyCode() {
+    navigator.clipboard.writeText('BOLD20').then(() => showToast('✓ Code BOLD20 copied!')).catch(() => showToast('Code: BOLD20'));
+  }
+
+  let toastTimer;
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+  }
+
+  // Hover effect on placeholder images
+  document.querySelectorAll('.product-card').forEach(card => {
+    const img = card.querySelector('.product-img-placeholder');
+    card.addEventListener('mouseenter', () => img.style.transform = 'scale(1.04)');
+    card.addEventListener('mouseleave', () => img.style.transform = 'scale(1)');
+  });
+</script>
+
+</body>
+</html>
